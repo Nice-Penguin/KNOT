@@ -1,0 +1,121 @@
+// .homepage {
+//     width: 80%;
+//     margin-left: 10%;
+//     margin-right: 10%;
+// }
+
+
+  .home_introduce,
+  .home_solution,
+  .home_description,
+  .home_SSH,
+  .home_Linux {
+    display: flex;
+    margin: 2%;
+  }
+  .home_techstack{
+    display: inline-flex;
+    background-color: aqua;
+    width: 100%;
+  }
+
+  .home_script {
+    width: 40%;
+    margin: 2%;
+  }
+
+  .home_image {
+    width: 60%;
+    margin: 2%;
+  }
+
+  .home_image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  // .default_link{
+  //   background-color: darkgray;
+  //   border-radius: 40px;
+  //   color: #fff;
+  //   font-size: 1rem;
+  //   font-weight: bold;
+  //   min-width: 80px;
+  //   padding: 16px 32px;
+  //   text-align: center;
+  //   cursor: pointer;
+  //   display: inline-block;
+  //   position: relative;
+  //   text-decoration: none;
+  //   width: auto;
+
+  // }
+
+
+
+
+@mixin sweep_to_right($font_color, $background_color) {
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+    border-radius: 40px;
+		background: $background_color;
+		transform: scaleX(0);
+		transform-origin: 0 100%;
+		transition-property: transform;
+		transition-duration:0.4s;
+		transition-timing-function:ease-out;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $font_color;
+
+		&:before {
+			transform: scaleX(1);
+		}
+	}
+}
+
+@mixin round_link{
+  border-radius: 40px;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  min-width: 80px;
+  overflow: hidden;
+  padding: 16px 32px;
+  transition: color .4s linear;
+  text-decoration: none;
+  z-index: 1;
+  
+
+}
+
+.intro_link {
+  @include sweep_to_right(#000000, #5AC3D9);
+  align-items: center;
+  background-color: #3B393C;
+  color: #FFFFFF;
+  border: none;
+  @include round_link;
+}
+
+.default_link {
+  @include sweep_to_right(#000000, #FFFFFF);
+  align-items: center;
+  background-color: #3B393C;
+  color: #FFFFFF;
+  border-color: black;
+  border: 1px solid black;
+  @include round_link;
+}
