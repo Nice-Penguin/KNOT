@@ -60,7 +60,7 @@ function Introduce() {
         <div className="home_introduce">
             <Script title="KNOT" scripts="KNOT이란, KNOT is Not Only Ternimal 의 줄임말로 단순히 버튼으로 사용하는 ssh 가 아닌 터미널을 의미합니다."
                 hname="직접 사용 해보기" styleType="intro_link"></Script>
-            {/* <Image source=""></Image> */}
+            <Image source="./image/hello.gif"></Image>
         </div>
     );
 }
@@ -68,7 +68,7 @@ function Introduce() {
 function Solution() {
     return (
         <div className="home_solution">
-            {/* <Image source=""></Image> */}
+            <Image source="./image/touch_file.gif"></Image>
             <Script title="Solution"
                 scripts="우리의 목적은 더 쉽고 간단하게 사용할 수 있도록 UI기반의 터미널을 제공합니다."
                 hname="자세히 알아보기..." styleType="default_link"></Script>
