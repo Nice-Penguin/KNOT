@@ -9,11 +9,11 @@ body {
     height: 100vh;
 }
 #footer {
+    margin-top: 2vh;
     background-color: #90CFD4;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    vertical-align: center;
     height: 10vh;
 }
 #web_console {
@@ -85,22 +85,25 @@ body {
     margin-top: 10vh;
     margin-bottom: 10vh;
     display: flex;
-    color: #833600;
+    color: grey;
     text-align: left;
 }
 
 .divA1{
-    margin-top: -1%;
+    padding-top: 5vh;
     margin-left: 1%;
     width: 49vw;
     display:inline-block;
+    vertical-align: center;
+    text-align: center;
     font-size: 70px
 }
 .divA2{
+    padding-top: 5vh;
     right: -0.5%;
     width: 49vw;
     display:inline-block;
-    font-size: 30px ;
+    font-size: 20px ;
 }
 
 .map img {
@@ -112,6 +115,7 @@ body {
     width: 33%;
     padding: 0;
     position: relative;
+    vertical-align: center;
 }
 
 .imgSlider{
