@@ -112,7 +112,6 @@ body {
 }
 
 .image-segment{
-    width: 33%;
     padding: 0;
     position: relative;
     vertical-align: center;
@@ -168,21 +167,44 @@ body {
 .image-segment{
     margin: 0;
     display: flex;
+    position: relative;
     align-items: center;
     padding: 0;
 }
 
 .image-caption{
     position: absolute;
-    top: 33%;
-    left: 0;
+    top: 0;
     bottom: 0;
-    width: 100%;
-    height: 33%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.75);
     color: #fff;
-    padding: 10px;
+    padding-left: 5%;
+    padding-top: 40vh;
+    align-items: center;
     box-sizing: border-box;
     transition: left 0.2s ease;
     display: none;
+}
+
+#image-caption1{
+    z-index: 1;
+    left: 100%;
+    width: 166%;
+}
+#image-caption2{
+    z-index: 1;
+    width: 146%;
+    left: -146%
+}
+#image-caption3{
+    z-index: 1;
+    left: -171%;
+    width: 171%;
+    padding-left: 30vw;
+}
+#dummy-caption{
+    z-index: 1;
+    left: 100%;
+    width: 143%;
 }
