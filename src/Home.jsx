@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import view from './change_view'
 
 function Home() {
     // let observer = new IntersectionObserver((e)=>{
@@ -58,7 +59,9 @@ function Introduce() {
 
     return (
         <div className="home_introduce">
-            <Script title="KNOT" scripts="KNOT이란, KNOT is Not Only Ternimal 의 줄임말로 단순히 버튼으로 사용하는 ssh 가 아닌 터미널을 의미합니다."
+            <Script title="KNOT" click={view.show_console}
+            scripts="KNOT이란, KNOT is Not Only Ternimal 의 줄임말로 단순히 버튼으로 사용하는 ssh 가 아닌 터미널을 의미합니다.
+            옛 해커 스타일로 작명된 이 사이트는 여러분들에게 새로운 형태의 웹콘솔을 제시합니다."
                 hname="직접 사용 해보기" styleType="intro_link"></Script>
             <Image source="./image/hello.gif"></Image>
         </div>
@@ -69,8 +72,9 @@ function Solution() {
     return (
         <div className="home_solution">
             <Image source="./image/touch_file.gif"></Image>
-            <Script title="Solution"
-                scripts="우리의 목적은 더 쉽고 간단하게 사용할 수 있도록 UI기반의 터미널을 제공합니다."
+            <Script title="Solution" click={view.show_console}
+                scripts="우리의 목적은 더 쉽고 간단하게 사용할 수 있도록 UI기반의 터미널을 제공합니다. 
+                쉽게 사용할 수 있고, 리눅스를 처음 써보는 사람에게도 높은 접근성을 보여줍니다."
                 hname="자세히 알아보기..." styleType="default_link"></Script>
         </div>
     );
@@ -79,9 +83,12 @@ function Solution() {
 function Description() {
     return (
         <div className="home_description">
-            <Script title="Description"
-                scripts="KNOT Description script"
-                hname="자세히 알아보기..." styleType="default_link"></Script>
+            <Script title="Reference"
+                scripts={`리눅스에서는 다양한 명령어를 사용할 수 있습니다. 이 중에서도 가장 기본적인 명령어는 'ls’입니다. 
+                이 명령어는 현재 디렉토리에 있는 파일과 디렉토리의 목록을 보여줍니다. 다음으로 자주 사용되는 명령어는 'cd’입니다. 
+                이 명령어는 디렉토리를 변경할 때 사용합니다. 예를 들어, 'cd /home/user’라고 입력하면 ‘/home/user’ 디렉토리로 이동합니다. 
+                또한 ‘mkdir’ 명령어를 사용하면 새로운 디렉토리를 만들 수 있습니다.`} click={view.show_reference}
+                hname="Reference 살펴보기..." styleType="default_link"></Script>
             {/* <Image source=""></Image> */}
         </div>
     );
@@ -155,8 +162,8 @@ function Techstack(props) {
 function AboutUs() {
     return (
         <div className="home_about_us">
-            <Script title={`About Us`} link="" hname="About Us" styleType="default_link"
-                scripts={`Description of About us`} />
+            <Script title={`About Us`} hname="About Us" styleType="default_link" 
+                click={view.show_about} scripts={`Description of About us`} />
             
         </div>
 
@@ -169,7 +176,7 @@ function Script(props) {
         <div className="home_script">
             <h1>{props.title}</h1>
             <p>{props.scripts}</p>
-            <a className={props.styleType} href={props.link} >{props.hname}</a>
+            <a className={props.styleType} onClick={props.click} href={props.link} >{props.hname}</a>
         </div>
     );
 
