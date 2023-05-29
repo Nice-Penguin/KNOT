@@ -28,4 +28,5 @@ function show_about() {
     web_console.style.display = "none";
     reference.style.display = "none";
     about.style.display = "block";
+    initMap();
 }
