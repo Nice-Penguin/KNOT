@@ -9,8 +9,8 @@ body {
     height: 100vh;
 }
 #footer {
-    margin-top: 2vh;
-    background-color: #90CFD4;
+    padding-top: 1vh;
+    background-color: grey;
     color: white;
     text-align: center;
     vertical-align: center;
@@ -23,6 +23,9 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding: 1vh;
+}
+#about {
+    padding-bottom: 3vh;
 }
 #ssh_info {
     text-align: right;
@@ -42,6 +45,7 @@ body {
     margin-right: 12.5vw;
     margin-top: 5vh;
     width: 75vw;
+    background: #fcfcff;
 }
 #buttons {
     display: flex;
@@ -82,11 +86,10 @@ body {
     margin: 0;
 }
 .dAbout {
-    margin-top: 10vh;
-    margin-bottom: 10vh;
     display: flex;
     color: grey;
     text-align: left;
+    padding-bottom: 7vh;
 }
 
 .divA1{
@@ -127,8 +130,8 @@ body {
 
 .aboutT{
     font-size: 36px;
-    color: #333;
-    font-weight: 500;
+    color: grey;
+    font-weight: bolder;
     padding-top: 2vh;
     padding-bottom: 2vh;
     border-bottom: 1px solid #ccc;
@@ -153,7 +156,6 @@ body {
     line-height: 2em;
     text-align: center;
 }
-
 
 .imgv1 {
     display : flex;
