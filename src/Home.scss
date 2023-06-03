@@ -9,24 +9,22 @@
   .home_solution,
   .home_description,
   .home_SSH,
-  .home_Linux {
-    display: flex;
-    margin: 2%;
-  }
+  .home_Linux
   .home_techstack{
-    display: inline-flex;
-    background-color: aqua;
-    width: 100%;
+    display: flex;
   }
+  // .home_techstack{
+  //   display: inline-flex;
+  //   background-color: aqua;
+  //   width: 100%;
+  // }
 
   .home_script {
     width: 40%;
-    margin: 2%;
   }
 
   .home_image {
     width: 60%;
-    margin: 2%;
   }
 
   .home_image img {
@@ -34,22 +32,6 @@
     height: 100%;
   }
 
-  // .default_link{
-  //   background-color: darkgray;
-  //   border-radius: 40px;
-  //   color: #fff;
-  //   font-size: 1rem;
-  //   font-weight: bold;
-  //   min-width: 80px;
-  //   padding: 16px 32px;
-  //   text-align: center;
-  //   cursor: pointer;
-  //   display: inline-block;
-  //   position: relative;
-  //   text-decoration: none;
-  //   width: auto;
-
-  // }
 
 
 

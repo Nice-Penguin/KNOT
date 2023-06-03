@@ -147,14 +147,14 @@ function Techstack(props) {
     }, []);
 
     return (
-        <>
+        <div className='home_techstack'>
             <h1>Tech Stacks</h1>
             <div style={{ height: "200px", position: 'relative', overflow: "hidden" }}>
                 {positions.map((position, index) => (
                     <img key={index} src={require(`./image/tech_stack/${src_dir[index]}.png`)} style={{ width: "200px", height: "200px", position: 'absolute', left: position }} />
                 ))}
             </div>
-        </>
+        </div>
 
     );
 }
