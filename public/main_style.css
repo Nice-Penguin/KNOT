@@ -4,7 +4,29 @@
 }
 .navbar {
     min-height: 5vh;
+    position: relative;
 }
+
+
+.navbar-fixed-top+.content {
+    padding-top: 56px;
+}
+
+@media (min-width: 576px) {
+    .navbar-fixed-top+.content {
+        padding-top: 66px;
+    }
+    #google_translate {
+        position: static;
+        margin-top: 10px; /* 원하는 간격으로 조정 */
+    }
+}
+#google_translate {
+    position: absolute;
+    top: 100%;
+    right: 0;
+}
+
 body {
     height: 100vh;
 }

@@ -58,10 +58,20 @@
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="show_about()">About</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><div id="google_translate"></div></a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'ko', includedLanguages: 'en, ko'}, 'google_translate');
+    }
+  </script>
+
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <div id="main_article">
     <div id="home">
       <div id="root"></div>
@@ -415,7 +425,7 @@
         <div class="row" style="display:flex; margin-top: 2vh;">
           <div class="no-gutters" style="display:flex">
             <div class="col-4 image-segment" style="width:37.5%">
-              <img class="imgv1" id="image-frame1" src="img/1.png" alt="">
+              <img class="imgv1" id="image-frame1" src="img/hyunsa.png" alt="">
               <div class="image-caption" id="image-caption1">
                 <p>
                   "Hi I'm team leader <strong>조민우</strong>."
@@ -428,7 +438,7 @@
               </div>
             </div>
             <div class="col-4 image-segment" style="width:25.65%">
-              <img class="imgv1" id="image-frame2" src="img/2.png" alt="">
+              <img class="imgv1" id="image-frame2" src="img/seokhyun.png" alt="">
               <div class="image-caption" id="image-caption2">
                 <p>
                   "Hi I'm team member <strong>윤석현</strong>."
@@ -442,7 +452,7 @@
               </div>
             </div>
             <div class="col-4 image-segment" style="width:36.85%">
-              <img class="imgv1" id="image-frame3" src="img/3.png"alt="">
+              <img class="imgv1" id="image-frame3" src="img/tom.png"alt="">
               <div class="image-caption" id="image-caption3">
                 <p>
                   "Hi I'm team member <strong>Jeon-Tom</strong>."
