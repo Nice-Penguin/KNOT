@@ -27,6 +27,7 @@ const change_view = {
         web_console.style.display = "none";
         reference.style.display = "none";
         about.style.display = "block";
+        window.dispatchEvent(new Event('resize'));
     }
     
 }

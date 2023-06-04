@@ -7,6 +7,7 @@ function show_home() {
     web_console.style.display = "none";
     reference.style.display = "none";
     about.style.display = "none";
+   
 }
 
 function show_console() {
@@ -14,6 +15,7 @@ function show_console() {
     web_console.style.display = "flex";
     reference.style.display = "none";
     about.style.display = "none";
+   
 }
 
 function show_reference() {
@@ -21,6 +23,7 @@ function show_reference() {
     web_console.style.display = "none";
     reference.style.display = "flex";
     about.style.display = "none";
+
 }
 
 function show_about() {
