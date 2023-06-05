@@ -9,9 +9,9 @@
   .home_solution,
   .home_description,
   .home_SSH,
-  .home_Linux
-  .home_techstack{
+  .home_Linux{
     display: flex;
+    margin-top: 5%;
   }
   // .home_techstack{
   //   display: inline-flex;
@@ -21,10 +21,12 @@
 
   .home_script {
     width: 40%;
+    font-size: 1.5em;
   }
 
   .home_image {
-    width: 60%;
+    width: 55%;
+    margin-right: 5%;
   }
 
   .home_image img {
