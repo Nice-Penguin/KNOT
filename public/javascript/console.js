@@ -1,4 +1,4 @@
-const socket = io.connect('http://localhost:3000');
+const socket = io.connect('http://tuxserver.cbnu.ac.kr:3000');
 
 
 function handleKeyPress(event) {
