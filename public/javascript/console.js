@@ -1,4 +1,4 @@
-const socket = io.connect('http://tuxserver.cbnu.ac.kr:3000');
+const socket = io.connect('http://tuxserver.cbnu.ac.kr:10021');
 
 
 function handleKeyPress(event) {
