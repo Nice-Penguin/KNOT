@@ -20,6 +20,7 @@ function show_console() {
     reference.classList.remove("fade-in");
     about.style.display = "none";
     about.classList.remove("fade-in");
+    window.dispatchEvent(new Event('resize'));
 }
 
 function show_reference() {
@@ -40,6 +41,7 @@ function show_about() {
     reference.classList.remove("fade-in");
     about.style.display = "block";
     about.classList.add("fade-in");
-    initMap();
+    window.dispatchEvent(setTimeout());
+    window.dispatchEvent(new Event('resize'));
 }
 

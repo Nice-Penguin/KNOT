@@ -15,6 +15,7 @@ const change_view = {
         web_console.style.display = "flex";
         reference.style.display = "none";
         about.style.display = "none";
+        window.dispatchEvent(new Event('resize'));
     },
     show_reference : function show_reference() {
         home.style.display = "none";
