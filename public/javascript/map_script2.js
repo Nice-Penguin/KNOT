@@ -29,6 +29,3 @@ function initMap2(lat, lng) {
         num++;
     });
 }
-// document.addEventListener('DOMContentLoaded', () => {
-//     initMap2(37.5665, 126.9780); // 임의의 기본 위도와 경도를 전달합니다. 이를 변경하여 다른 위치를 기본값으로 사용할 수 있습니다.
-// });

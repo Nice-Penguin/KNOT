@@ -18,7 +18,9 @@ document.getElementById('connect').onclick = () => {
     const port = document.getElementById('port').value;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    socket.emit('ssh-connect', {host, port, username, password});
+    socket.emit('ssh-connect', {host, port, username, password}); 
+    
+    getPositionByIPAddress(host);
 };
 
 document.getElementById('send').onclick = () => {
@@ -89,3 +91,30 @@ socket.on('ssh-error', (error) => {
 socket.on('ssh-end', () => {
     document.getElementById('console').value += 'SSH Connection Closed\n';
 });
+
+function getPositionByIPAddress(ipAddress) {
+    const apiKey = "f45aa13450af33ca973542a336099aa8";
+    const url ="http://api.ipstack.com/"+ipAddress+"?access_key=f45aa13450af33ca973542a336099aa8" 
+    $.ajax({
+      method: "GET",
+      url: url,
+      dataType: 'json',
+      
+      success: function (response) {
+        const coordinates = {
+          x: response.longitude,
+          y: response.latitude,
+          
+        }
+        
+        console.log(`위도: ${coordinates.y}, 경도: ${coordinates.x}`);
+        initMap2(coordinates.y, coordinates.x);
+      },
+      error: function (xhr, status, error)
+      {
+          $('body').css('cursor', 'default');    //커서 정상모양
+
+          alert(error + "\n" + status + "\n" + xhr.responseText);
+      }
+    });
+  }

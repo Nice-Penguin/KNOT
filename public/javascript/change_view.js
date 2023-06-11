@@ -41,7 +41,6 @@ function show_about() {
     reference.classList.remove("fade-in");
     about.style.display = "block";
     about.classList.add("fade-in");
-    window.dispatchEvent(setTimeout());
     window.dispatchEvent(new Event('resize'));
 }
 
