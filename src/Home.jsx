@@ -5,7 +5,7 @@ import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
 
-const API_KEY = "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";
+const API_KEY = "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";
 const systemMessage = { 
     "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
 }
@@ -45,10 +45,10 @@ function ChatBot() {
             width: "100%"
         }
     )
-    const [buttonText, setButtonText] = useState("Learn more with GPT");
+    const [buttonText, setButtonText] = useState("GPT에게 질문하기");
     const [messages, setMessages] = useState([
         {
-            message: "Hello, I'm ChatGPT! Ask me anything!",
+            message: "안녕하세요! 저는 ChatGPT 입니다. 무슨일이신가요?",
             sentTime: "just now",
             sender: "ChatGPT"
         }
@@ -200,12 +200,12 @@ function Interaction() {
                         legendToggle></Chart>
                 </div>
             </div>
-            <ScrollScript toggle={setToggle} index={0} script={`You can use ssh like putty. And it is only available in Windows environment.
-            However, KNOT can be used in any environment connected to the Internet, macOS, Linux environment, even mobile.`}></ScrollScript>
-            <ScrollScript toggle={setToggle} index={1} script="Furthermore, you can access your server from anywhere with an internet connection. Even if you go camping."></ScrollScript>
-            <ScrollScript index={2} script="In fact, did you know that most of the developers repeat certain commands?"></ScrollScript>
-            <ScrollScript index={3} script="Don't worry if you don't have a keyboard.
-            You can easily execute commands by pressing a button."></ScrollScript>
+            <ScrollScript toggle={setToggle} index={0} script={`당신은 SSH를 Putty와 같은 외부 프로그램으로 사용하실 수 있습니다.
+            그러나, KNOT는 설치가 필요없는, 웹 환경에서의 SSH 터미널을 지원합니다.`}></ScrollScript>
+            <ScrollScript toggle={setToggle} index={1} script="더 나아가, KNOT는 인터넷만 연결된다면 어디서든지 사용할 수 있는 환경을 제공합니다. 당신이 캠핑을 하는 도중에도 말이죠."></ScrollScript>
+            <ScrollScript index={2} script="또한, 많은 개발자들은 자주 사용하는 명령어를 치기 위해 키보드를 두드립니다."></ScrollScript>
+            <ScrollScript index={3} script="그러나 이러한 피로도를 해결하는 솔루션을 제시합니다.
+            당신은 간단한 명령어들을 버튼으로써 입력할 수 있습니다."></ScrollScript>
             <ScrollScript></ScrollScript>
         </div>
     );
@@ -280,8 +280,8 @@ function Introduce() {
     return (
         <div className="home_introduce">
             <Script title="KNOT" click={view.show_console}
-                scripts="KNOT, short for KNOT is Not Only Ternimal, means a terminal other than ssh that is simply used as a button. 
-                Named in the old hacker style, this site presents you with a new type of web console."
+                scripts="KNOT는 KNOT's Not Only Terminal을 의미합니다.
+                옛 해커식 작명법으로 명명된 이 프로젝트는, 당신에게 웹으로 사용가능한 SSH 웹 콘솔을 제시합니다."
                 hname="Try It Yourself" styleType="intro_link"></Script>
             <Image source="./image/hello.gif"></Image>
         </div>
@@ -293,8 +293,8 @@ function Solution() {
         <div className="home_solution">
             <Image source="./image/touch_file.gif"></Image>
             <Script title="Solution" click={view.show_console}
-                scripts="Our purpose is to provide a UI-based terminal to make it easier and simpler to use.
-                It is easy to use and shows high accessibility even to those who are new to Linux."
+                scripts="저희의 목적은 쉽게 사용할 수 있는 웹 SSH 콘솔의 제공입니다.
+                리눅스에 처음이더라도, 친숙해지도록 버튼을 통해 명령어 입력을 지원합니다."
                 hname="Learn More..." styleType="default_link"></Script>
         </div>
     );
@@ -324,10 +324,11 @@ function Description() {
     return (
         <div className="home_description" ref={scrollRef} style={{ opacity: opacityValue, transition: "1s" }}>
             <Script title="Reference"
-                scripts={`Various commands are available in Linux. Among them, the most basic command is 'ls'.
-                This command lists the files and directories in the current directory. The next most frequently used command is 'cd'.
-                This command is used to change directories. For example, typing 'cd /home/user' will take you to the '/home/user' directory.
-                You can also create a new directory by using the ‘mkdir’ command.`} click={view.show_reference}
+                scripts={`리눅스에서는 다양한 명령어를 사용할 수 있습니다. 그 중 가장 기본적인 명령은 'ls'입니다.
+                이 명령은 현재 디렉터리에 있는 파일과 디렉터리를 나열합니다. 다음으로 자주 사용되는 명령은 'cd'입니다.
+                이 명령은 디렉터리를 변경하는 데 사용됩니다. 예를 들어 'cd /home/user'를 입력하면 '/home/user' 디렉토리로 이동합니다.
+                'mkdir' 명령을 사용하여 새 디렉터리를 만들 수도 있습니다.
+                레퍼런스에선, 여러분들에게 명령어들에 대한 설명을 제공합니다.`} click={view.show_reference}
                 hname="Look Around Reference..." styleType="default_link"></Script>
             <Image source="./image/linux_command.jpeg"></Image>
         </div>
