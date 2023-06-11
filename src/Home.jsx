@@ -1,68 +1,288 @@
-import React, { useState, useEffect } from 'react'
-import view from './change_view'
+import React, { useState, useEffect, useRef, useTransition } from 'react';
+import view from './change_view';
+import { Chart } from "react-google-charts";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
+
+
+const API_KEY = "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";
+const systemMessage = { 
+    "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
+}
+
+
 
 function Home() {
-    // let observer = new IntersectionObserver((e)=>{
-    //     e.forEach((box)=>{
-    //         if (box.isIntersecting){
-    //             box.target.style.opacity = 1;
-    //         }
-    //         else{
 
-    //         }
-    //     });
-
-    // });
-    // let homepage = document.getElementsByClassName("homepage")[0];
-    // observer.observe(homepage);
-
-    // window.addEventListener("scroll", function(event){
-
-    // 	var top = this.scrollY;
-
-    // 	var layers = document.getElementsByClassName("parallax");
-    // 	var layer, speed, yPos;
-    // 	for (var i = 0; i < layers.length; i++) {
-    // 		layer = layers[i];
-    // 		speed = layer.getAttribute('data-speed');
-    // 		var yPos = -(top * speed / 100);
-    // 		layer.setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
-
-    // 	}
-    // });
-
-    // const [scrollPosition, setScrollPosition] = useState(0);
-
-    // window.addEventListener('scroll', function () {
-    //     setScrollPosition(window.scrollY);
-    // });  
-    //, backgroundPositionY: -scrollPosition background: "url(./background_image/OBDKVJ0.jpg", 
-    //<div style={{ width: "100%", height: "5000px" }}></div>
     return (
         <div className="homepage" style={{}}>
-            <Introduce></Introduce>
+            {/* <Title></Title> */}
+            <Introduce className="home_introduce"></Introduce>
+            <Techstack></Techstack>
+            <Interaction></Interaction>
+
             <Solution></Solution>
             <Description></Description>
+            <ChatBot></ChatBot>
             <SSH></SSH>
             <Linux></Linux>
-            <Techstack></Techstack>
+
             <AboutUs></AboutUs>
+
             <div className="home_background1" ></div>
-            
         </div>
     );
 
 }
 
+function ChatBot() {
+    const [isChatting, setIsChatting] = useState(false);
+    const [visible, setVisible] = useState(
+        {
+            display: "none",
+            position: "relative", 
+            height: "80%",
+            width: "100%"
+        }
+    )
+    const [buttonText, setButtonText] = useState("Learn more with GPT");
+    const [messages, setMessages] = useState([
+        {
+            message: "Hello, I'm ChatGPT! Ask me anything!",
+            sentTime: "just now",
+            sender: "ChatGPT"
+        }
+    ]);
+    const [isTyping, setIsTyping] = useState(false);
+
+    const handleSend = async (message) => {
+        const newMessage = {
+            message,
+            direction: 'outgoing',
+            sender: "user"
+        };
+
+        const newMessages = [...messages, newMessage];
+
+        setMessages(newMessages);
+        setIsTyping(true);
+        await processMessageToChatGPT(newMessages);
+    };
+
+    async function processMessageToChatGPT(chatMessages) {
+
+        let apiMessages = chatMessages.map((messageObject) => {
+            let role = "";
+            if (messageObject.sender === "ChatGPT") {
+                role = "assistant";
+            } else {
+                role = "user";
+            }
+            return { role: role, content: messageObject.message }
+        });
+
+        const apiRequestBody = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                systemMessage, 
+                ...apiMessages 
+            ]
+        }
+
+        await fetch("https://api.openai.com/v1/chat/completions",
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + API_KEY,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(apiRequestBody)
+            }).then((data) => {
+                return data.json();
+            }).then((data) => {
+                console.log(data);
+                setMessages([...chatMessages, {
+                    message: data.choices[0].message.content,
+                    sender: "ChatGPT"
+                }]);
+                setIsTyping(false);
+            });
+    }
+
+    function chageToggle(){
+        setIsChatting(isChatting ? false : true);
+        if (isChatting){
+            setVisible((prevState)=>{
+                return {...prevState, display: "none"}
+            });
+            setButtonText("Learn more with GPT");
+
+        }else{
+            setVisible((prevState)=>{
+                return {...prevState, display: "flex"}
+            });
+            setButtonText("Close GPT");
+        }
+        console.log(visible);
+    }
+    return (
+        <div className="home_chatbot">
+            <div style={visible}>
+                <MainContainer>
+                    <ChatContainer>
+                        <MessageList
+                            scrollBehavior="smooth"
+                            typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
+                        >
+                            {messages.map((message, i) => {
+                                console.log(message)
+                                return <Message key={i} model={message} />
+                            })}
+                        </MessageList>
+                        <MessageInput placeholder="Type message here" onSend={handleSend} />
+                    </ChatContainer>
+                </MainContainer>
+
+            </div>
+            <div className="home_chat_button">
+                    <a className={"intro_link"} onClick={chageToggle} >{buttonText}</a>
+            </div>
+        </div>
+
+
+    );
+}
+
+function Interaction() {
+    const { toggle, setToggle } = useState(0);
+    const data = [["Command", "Frequency", { role: "style" }],
+    ["ls", 3435, "red"],
+    ["cd", 3132, "red"],
+    ["git", 2387, "blue"],
+    ["python", 1879, "blue"],
+    ["rm", 1682, "blue"],
+    ["vim", 1521, "blue"],
+    ["j", 755, "blue"],
+    ["tmux", 555, "blue"],
+    ["source", 422, "blue"],
+    ["mv", 311, "blue"],
+    ["which", 265, "blue"],
+    ["ssh", 111, "blue"],
+    ["cp", 99, "blue"],
+    ["mkdir", 24, "blue"]
+    ];
+
+    const option = {
+        title: "frequently executed commands",
+        hAxis: { title: "Command" },
+        vAxis: { title: "Frequency" },
+        legend: "none",
+        animation: {
+            "startup": true,
+            duration: 1000,
+            easing: 'out',
+        }
+    };
+
+    return (
+        <div className='home_interaction'>
+            <div className='home_scroll_images'>
+                <ScrollImage opacity={toggle == 0 ? 1 : null} source="./image/putty.jpg"></ScrollImage>
+                <ScrollImage opacity={toggle == 1 ? 1 : null} source="./image/camping.jpg"></ScrollImage>
+                <div className="home_scroll_image">
+                    <Chart
+                        chartType="ColumnChart"
+                        data={data}
+                        options={option}
+                        width="100%"
+                        height="400px"
+                        position="absolute"
+                        legendToggle></Chart>
+                </div>
+            </div>
+            <ScrollScript toggle={setToggle} index={0} script={`You can use ssh like putty. And it is only available in Windows environment.
+            However, KNOT can be used in any environment connected to the Internet, macOS, Linux environment, even mobile.`}></ScrollScript>
+            <ScrollScript toggle={setToggle} index={1} script="Furthermore, you can access your server from anywhere with an internet connection. Even if you go camping."></ScrollScript>
+            <ScrollScript index={2} script="In fact, did you know that most of the developers repeat certain commands?"></ScrollScript>
+            <ScrollScript index={3} script="Don't worry if you don't have a keyboard.
+            You can easily execute commands by pressing a button."></ScrollScript>
+            <ScrollScript></ScrollScript>
+        </div>
+    );
+}
+
+// You can use ssh like putty. And it is only available in Windows environment. However, KNOT can be used in any environment connected to the Internet, macOS, Linux environment, even mobile.
+
+// Furthermore, you can access your server from anywhere with an internet connection. Even if you go camping.
+
+// In fact, did you know that most of the developers repeat certain commands?
+
+// Don't worry if you don't have a keyboard.
+// You can easily execute commands by pressing a button.
+
+function ScrollScript(props) {
+    const scrollRef = useRef(null);
+    const [opacityValue, setOpacity] = useState(0);
+    //const scrollImage = document.getElementsByClassName("home_scroll_image");
+
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        window.addEventListener("scroll", scrollEvent);
+        return () => {
+            window.removeEventListener("scroll", scrollEvent);
+        }
+    }, [scrollRef.current]);
+
+    const scrollEvent = () => {
+        const scroll = scrollRef.current.getBoundingClientRect();
+        if (scroll.y < window.innerHeight * 0.1 &&
+            scroll.y > window.innerHeight * 0.8) {
+            setOpacity(1);
+            //props.toggle.setToggle(props.index);
+        } else {
+            //setOpacity(0);
+        }
+    }
+    return (
+        <div ref={scrollRef} className='home_scroll_script' style={{ opacity: 1, transition: "1s" }}>
+            <p>{props.script}</p>
+        </div>
+    );
+}
+
+function ScrollImage(props) {
+    const scrollRef = useRef(null);
+    const [opacityValue, setOpacity] = useState(0);
+
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        window.addEventListener("scroll", scrollEvent);
+        return () => {
+            window.removeEventListener("scroll", scrollEvent);
+        }
+    }, [scrollRef.current]);
+
+    const scrollEvent = () => {
+        const scroll = scrollRef.current.getBoundingClientRect();
+        if (scroll.y < window.innerHeight * 0.6) {
+            setOpacity(1);
+        }
+    }
+    return (
+        <div className="home_scroll_image" ref={scrollRef} style={{ opacity: opacityValue, transition: "1s" }}>
+            <img src={require(`${props.source}`)}></img>
+        </div>
+    );
+}
 
 function Introduce() {
 
     return (
         <div className="home_introduce">
             <Script title="KNOT" click={view.show_console}
-            scripts="KNOT이란, KNOT is Not Only Ternimal 의 줄임말로 단순히 버튼으로 사용하는 ssh 가 아닌 터미널을 의미합니다.
-            옛 해커 스타일로 작명된 이 사이트는 여러분들에게 새로운 형태의 웹콘솔을 제시합니다."
-                hname="직접 사용 해보기" styleType="intro_link"></Script>
+                scripts="KNOT, short for KNOT is Not Only Ternimal, means a terminal other than ssh that is simply used as a button. 
+                Named in the old hacker style, this site presents you with a new type of web console."
+                hname="Try It Yourself" styleType="intro_link"></Script>
             <Image source="./image/hello.gif"></Image>
         </div>
     );
@@ -73,23 +293,43 @@ function Solution() {
         <div className="home_solution">
             <Image source="./image/touch_file.gif"></Image>
             <Script title="Solution" click={view.show_console}
-                scripts="우리의 목적은 더 쉽고 간단하게 사용할 수 있도록 UI기반의 터미널을 제공합니다. 
-                쉽게 사용할 수 있고, 리눅스를 처음 써보는 사람에게도 높은 접근성을 보여줍니다."
-                hname="자세히 알아보기..." styleType="default_link"></Script>
+                scripts="Our purpose is to provide a UI-based terminal to make it easier and simpler to use.
+                It is easy to use and shows high accessibility even to those who are new to Linux."
+                hname="Learn More..." styleType="default_link"></Script>
         </div>
     );
 }
 
 function Description() {
+
+    const scrollRef = useRef(null);
+    const [opacityValue, setOpacity] = useState(0);
+
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        window.addEventListener("scroll", scrollEvent);
+        return () => {
+            window.removeEventListener("scroll", scrollEvent);
+        }
+    }, [scrollRef.current]);
+
+    const scrollEvent = () => {
+        const scroll = scrollRef.current.getBoundingClientRect();
+        if (scroll.y < window.innerHeight * 0.6) {
+            setOpacity(1);
+        }
+    }
+
+
     return (
-        <div className="home_description">
+        <div className="home_description" ref={scrollRef} style={{ opacity: opacityValue, transition: "1s" }}>
             <Script title="Reference"
-                scripts={`리눅스에서는 다양한 명령어를 사용할 수 있습니다. 이 중에서도 가장 기본적인 명령어는 'ls’입니다. 
-                이 명령어는 현재 디렉토리에 있는 파일과 디렉토리의 목록을 보여줍니다. 다음으로 자주 사용되는 명령어는 'cd’입니다. 
-                이 명령어는 디렉토리를 변경할 때 사용합니다. 예를 들어, 'cd /home/user’라고 입력하면 ‘/home/user’ 디렉토리로 이동합니다. 
-                또한 ‘mkdir’ 명령어를 사용하면 새로운 디렉토리를 만들 수 있습니다.`} click={view.show_reference}
-                hname="Reference 살펴보기..." styleType="default_link"></Script>
-            {/* <Image source=""></Image> */}
+                scripts={`Various commands are available in Linux. Among them, the most basic command is 'ls'.
+                This command lists the files and directories in the current directory. The next most frequently used command is 'cd'.
+                This command is used to change directories. For example, typing 'cd /home/user' will take you to the '/home/user' directory.
+                You can also create a new directory by using the ‘mkdir’ command.`} click={view.show_reference}
+                hname="Look Around Reference..." styleType="default_link"></Script>
+            <Image source="./image/linux_command.jpeg"></Image>
         </div>
     );
 }
@@ -100,7 +340,7 @@ function Linux() {
             <Script title={`What is "Linux"?`} link="https://www.redhat.com/en/topics/linux/what-is-linux" hname="더 알아보기" styleType="default_link"
                 scripts={`Linux® is an open source operating system (OS). It was originally conceived of and created as a hobby by Linus Torvalds in 1991. Linus, while at university, sought to create an alternative, free, open source version of the MINIX operating system, which was itself based on the principles and design of Unix. 
             That hobby has since become the OS with the largest user base, the most-used OS on publicly available internet servers, and the only OS used on the top 500 fastest supercomputers.`} />
-            <Image source="./image/figure_of_linux.jpeg"></Image>
+            <Image source="./image/figure_of_linux.png"></Image>
         </div>
 
     );
@@ -149,9 +389,9 @@ function Techstack(props) {
     return (
         <div className='home_techstack'>
             <h1>Tech Stacks</h1>
-            <div style={{ height: "200px", position: 'relative', overflow: "hidden" }}>
+            <div style={{ height: "10rem", position: 'relative', overflow: "hidden" }}>
                 {positions.map((position, index) => (
-                    <img key={index} src={require(`./image/tech_stack/${src_dir[index]}.png`)} style={{ width: "200px", height: "200px", position: 'absolute', left: position }} />
+                    <img key={index} src={require(`./image/tech_stack/${src_dir[index]}.png`)} style={{ width: "10rem", height: "10rem", position: 'absolute', left: position }} />
                 ))}
             </div>
         </div>
@@ -162,9 +402,9 @@ function Techstack(props) {
 function AboutUs() {
     return (
         <div className="home_about_us">
-            <Script title={`About Us`} hname="About Us" styleType="default_link" 
-                click={view.show_about} scripts={`Description of About us`} />
-            
+            <Script title={`About Us`} hname="About Us" styleType="default_link"
+                click={view.show_about} scripts={`To know more about us click the button below`} />
+
         </div>
 
     );
@@ -172,8 +412,25 @@ function AboutUs() {
 
 
 function Script(props) {
+    const scrollRef = useRef(null);
+    const [opacityValue, setOpacity] = useState(0);
+
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        window.addEventListener("scroll", scrollEvent);
+        return () => {
+            window.removeEventListener("scroll", scrollEvent);
+        }
+    }, [scrollRef.current]);
+
+    const scrollEvent = () => {
+        const scroll = scrollRef.current.getBoundingClientRect();
+        if (scroll.y < window.innerHeight * 0.6) {
+            setOpacity(1);
+        }
+    }
     return (
-        <div className="home_script">
+        <div className="home_script" ref={scrollRef} style={{ opacity: opacityValue, transition: "1s" }}>
             <h1>{props.title}</h1>
             <p>{props.scripts}</p>
             <a className={props.styleType} onClick={props.click} href={props.link} >{props.hname}</a>
@@ -183,8 +440,25 @@ function Script(props) {
 }
 
 function Image(props) {
+    const scrollRef = useRef(null);
+    const [opacityValue, setOpacity] = useState(0);
+
+    useEffect(() => {
+        if (!scrollRef.current) return;
+        window.addEventListener("scroll", scrollEvent);
+        return () => {
+            window.removeEventListener("scroll", scrollEvent);
+        }
+    }, [scrollRef.current]);
+
+    const scrollEvent = () => {
+        const scroll = scrollRef.current.getBoundingClientRect();
+        if (scroll.y < window.innerHeight * 0.6) {
+            setOpacity(1);
+        }
+    }
     return (
-        <div className="home_image">
+        <div className="home_image" ref={scrollRef} style={{ opacity: opacityValue, transition: "1s" }}>
             <img src={require(`${props.source}`)}></img>
         </div>
     );
