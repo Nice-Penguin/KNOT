@@ -5,7 +5,7 @@ import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
 
-const API_KEY = "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";
+const API_KEY = "";
 const systemMessage = { 
     "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
 }
@@ -206,7 +206,6 @@ function Interaction() {
             <ScrollScript index={2} script="또한, 많은 개발자들은 자주 사용하는 명령어를 치기 위해 키보드를 두드립니다."></ScrollScript>
             <ScrollScript index={3} script="그러나 이러한 피로도를 해결하는 솔루션을 제시합니다.
             당신은 간단한 명령어들을 버튼으로써 입력할 수 있습니다."></ScrollScript>
-            <ScrollScript></ScrollScript>
         </div>
     );
 }
@@ -246,6 +245,10 @@ function ScrollScript(props) {
     return (
         <div ref={scrollRef} className='home_scroll_script' style={{ opacity: 1, transition: "1s" }}>
             <p>{props.script}</p>
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
         </div>
     );
 }
@@ -282,7 +285,7 @@ function Introduce() {
             <Script title="KNOT" click={view.show_console}
                 scripts="KNOT는 KNOT's Not Only Terminal을 의미합니다.
                 옛 해커식 작명법으로 명명된 이 프로젝트는, 당신에게 웹으로 사용가능한 SSH 웹 콘솔을 제시합니다."
-                hname="Try It Yourself" styleType="intro_link"></Script>
+                hname="직접 해보기" styleType="intro_link"></Script>
             <Image source="./image/hello.gif"></Image>
         </div>
     );
@@ -295,7 +298,7 @@ function Solution() {
             <Script title="Solution" click={view.show_console}
                 scripts="저희의 목적은 쉽게 사용할 수 있는 웹 SSH 콘솔의 제공입니다.
                 리눅스에 처음이더라도, 친숙해지도록 버튼을 통해 명령어 입력을 지원합니다."
-                hname="Learn More..." styleType="default_link"></Script>
+                hname="터미널 살펴보기" styleType="default_link"></Script>
         </div>
     );
 }
@@ -329,7 +332,7 @@ function Description() {
                 이 명령은 디렉터리를 변경하는 데 사용됩니다. 예를 들어 'cd /home/user'를 입력하면 '/home/user' 디렉토리로 이동합니다.
                 'mkdir' 명령을 사용하여 새 디렉터리를 만들 수도 있습니다.
                 레퍼런스에선, 여러분들에게 명령어들에 대한 설명을 제공합니다.`} click={view.show_reference}
-                hname="Look Around Reference..." styleType="default_link"></Script>
+                hname="레퍼런스 살펴보기" styleType="default_link"></Script>
             <Image source="./image/linux_command.jpeg"></Image>
         </div>
     );
@@ -339,8 +342,8 @@ function Linux() {
     return (
         <div className="home_Linux">
             <Script title={`What is "Linux"?`} link="https://www.redhat.com/en/topics/linux/what-is-linux" hname="더 알아보기" styleType="default_link"
-                scripts={`Linux® is an open source operating system (OS). It was originally conceived of and created as a hobby by Linus Torvalds in 1991. Linus, while at university, sought to create an alternative, free, open source version of the MINIX operating system, which was itself based on the principles and design of Unix. 
-            That hobby has since become the OS with the largest user base, the most-used OS on publicly available internet servers, and the only OS used on the top 500 fastest supercomputers.`} />
+                scripts={`Linux®는 오픈 소스 운영 체제(OS)입니다. 1991년 리누스 토발즈가 취미로 구상하고 만든 것이 시초입니다. 대학에 재학 중이던 라이너스는 유닉스의 원리와 설계를 기반으로 한 무료 오픈 소스 버전의 MINIX 운영 체제를 만들려고 했습니다. 
+            이 취미는 이후 가장 많은 사용자 기반을 가진 OS, 공개적으로 사용 가능한 인터넷 서버에서 가장 많이 사용되는 OS, 가장 빠른 상위 500대 슈퍼컴퓨터에 사용되는 유일한 OS가 되었습니다.`} />
             <Image source="./image/figure_of_linux.png"></Image>
         </div>
 
@@ -351,7 +354,7 @@ function SSH() {
     return (
         <div className="home_SSH">
             <Script title={`What is "SSH"?`} link="https://www.ssh.com/academy/ssh" hname="더 알아보기" styleType="default_link"
-                scripts={`The SSH protocol uses encryption to secure the connection between a client and a server. All user authentication, commands, output, and file transfers are encrypted to protect against attacks in the network. For details of how the SSH protocol works, see the protocol page. To understand the SSH File Transfer Protocol, see the SFTP page.`} />
+                scripts={`SSH 프로토콜은 암호화를 사용하여 클라이언트와 서버 간의 연결을 보호합니다. 모든 사용자 인증, 명령, 출력 및 파일 전송은 네트워크에서 공격으로부터 보호하기 위해 암호화됩니다. SSH 프로토콜의 작동 방식에 대한 자세한 내용은 프로토콜 페이지를 참조하세요. SSH 파일 전송 프로토콜을 이해하려면 SFTP 페이지를 참조하세요.`} />
             <Image source="./image/figure_of_ssh.jpg"></Image>
         </div>
 
@@ -405,7 +408,6 @@ function AboutUs() {
         <div className="home_about_us">
             <Script title={`About Us`} hname="About Us" styleType="default_link"
                 click={view.show_about} scripts={`To know more about us click the button below`} />
-
         </div>
 
     );

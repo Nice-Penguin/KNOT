@@ -16,7 +16,7 @@ div{
 .home_introduce {
   display: flex;
   height: 60vh;
-  margin: 0 auto;
+  margin-top: 3vh;
   
 }
 
@@ -50,6 +50,11 @@ div{
   opacity: 0;
 }
 
+#home{
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
 
 .home_chatbot{
   margin: 5vh;
@@ -68,9 +73,9 @@ div{
   position: relative;
 
   p{
-    padding: 0.5rem;
-    margin-top: 60vh;
-    border-radius: 20px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    text-align: center;
     background: rgba($color: #ffffff, $alpha: 0.5);
     box-shadow: rgba($color: #000000, $alpha: 0.3) 0 0 2px;
     font-weight: bold;
